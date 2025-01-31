@@ -22,7 +22,6 @@ spec:
           env:
             - name: POSTGRES_PASSWORD
               value: "admin"   # Replace with your desired password
-      containers:
         - name: my-app3
           image: postgres
           ports:
