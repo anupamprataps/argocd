@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pinot-controller
+  name: pinot
   labels:
     app: pinot
 spec:
@@ -9,65 +9,13 @@ spec:
   selector:
     matchLabels:
       app: pinot
-      component: controller
   template:
     metadata:
       labels:
         app: pinot
-        component: controller
     spec:
       containers:
-        - name: pinot-controller
-          image: apachepinot/pinot-controller:latest
+        - name: pinot
+          image: apachepinot/pinot
           ports:
-            - containerPort: 9000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pinot-controller-service
-spec:
-  selector:
-    app: pinot
-    component: controller
-  ports:
-    - port: 9000
-      targetPort: 9000
-  type: ClusterIP
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: pinot-broker
-  labels:
-    app: pinot
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: pinot
-      component: broker
-  template:
-    metadata:
-      labels:
-        app: pinot
-        component: broker
-    spec:
-      containers:
-        - name: pinot-broker
-          image: apachepinot/pinot-broker:latest
-          ports:
-            - containerPort: 8099
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pinot-broker-service
-spec:
-  selector:
-    app: pinot
-    component: broker
-  ports:
-    - port: 8099
-      targetPort: 8099
-  type: ClusterIP
+            - containerPort: 8089
