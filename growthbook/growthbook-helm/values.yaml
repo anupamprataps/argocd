@@ -1,0 +1,13 @@
+mongo:
+  image: mongo:latest
+  username: root
+  password: password
+  database: growthbook
+  pvc:
+    storage: 1Gi
+
+growthbook:
+  image: growthbook/growthbook:latest
+  ports:
+    ui: 3000
+    api: 3100
