@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: trino
-        image: your-docker-repo/trino:latest
+        image: trinodb/trino
         ports:
         - containerPort: 8080
