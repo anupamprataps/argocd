@@ -1,18 +1,20 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: trino
-  namespace: argocd
+  namespace: trino
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/trinodb/charts
-    targetRevision: main
-    path: trino
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: trino
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trino
+  template:
+    metadata:
+      labels:
+        app: trino
+    spec:
+      containers:
+      - name: trino
+        image: your-docker-repo/trino:latest
+        ports:
+        - containerPort: 8080
