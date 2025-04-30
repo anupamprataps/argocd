@@ -17,4 +17,4 @@ spec:
       - name: trino
         image: trinodb/trino
         ports:
-        - containerPort: 8080
+        - containerPort: 8087
